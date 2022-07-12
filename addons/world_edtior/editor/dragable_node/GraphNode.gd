@@ -11,7 +11,7 @@ func _ready() -> void:
 	self.room_config = room_config
 	self.is_selected = is_selected
 	
-	label.self_modulate = Color.white #if ResourceLoader.exists(room_config.scene_path) else Color(1.0, 0.25, 0.25)
+	label.self_modulate = Color.white if ResourceLoader.exists(room_config.scene_path) else Color(1.0, 0.25, 0.25)
 
 
 func set_room_config(new_room_config:Resource) -> void:
