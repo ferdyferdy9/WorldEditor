@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/world_edtior/editor/dialog/EditRoomDialog.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[node name="EditRoomDialog" type="WindowDialog"]
+margin_right = 368.0
+margin_bottom = 129.0
+window_title = "Edit Room Area"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 367.0
+margin_bottom = 125.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 362.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 357.0
+margin_bottom = 70.0
+columns = 2
+
+[node name="lbl_area" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 6.0
+margin_right = 174.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+text = "Area :"
+
+[node name="ob_area" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 182.0
+margin_right = 356.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+
+[node name="lbl_area_color" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 45.0
+margin_right = 174.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+text = "Area Color :"
+
+[node name="btn_area_color" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 182.0
+margin_top = 45.0
+margin_right = 356.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 1 )
+flat = true
+
+[node name="btn_save" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_left = 92.0
+margin_top = 78.0
+margin_right = 265.0
+margin_bottom = 115.0
+size_flags_horizontal = 4
+text = "Save Changes"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_save" to="." method="_on_btn_save_pressed"]

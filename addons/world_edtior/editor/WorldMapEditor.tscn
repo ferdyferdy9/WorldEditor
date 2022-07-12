@@ -1,0 +1,247 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://addons/world_edtior/editor/WorldMapEditor.gd" type="Script" id=1]
+[ext_resource path="res://addons/world_edtior/editor/GraphContainer.gd" type="Script" id=2]
+[ext_resource path="res://addons/world_edtior/editor/factory/ConnectorFactory.gd" type="Script" id=3]
+[ext_resource path="res://addons/world_edtior/editor/factory/GraphNodeFactory.gd" type="Script" id=4]
+[ext_resource path="res://addons/world_edtior/editor/MapLayoutManager.gd" type="Script" id=5]
+[ext_resource path="res://addons/world_edtior/editor/ui/menu_button/FileMenuButton.gd" type="Script" id=6]
+[ext_resource path="res://addons/world_edtior/editor/factory/AreaLegendFactory.gd" type="Script" id=7]
+[ext_resource path="res://addons/world_edtior/editor/ui/menu_button/AreaMenuButton.gd" type="Script" id=8]
+[ext_resource path="res://addons/world_edtior/editor/ui/menu_button/RoomMenuButton.gd" type="Script" id=9]
+[ext_resource path="res://addons/world_edtior/editor/dialog/EditRoomDialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/world_edtior/editor/dialog/EditAreaDialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/world_edtior/editor/dialog/CreateChapterDialog.tscn" type="PackedScene" id=13]
+[ext_resource path="res://addons/world_edtior/editor/dialog/CreateAreaDialog.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/world_edtior/editor/dialog/CreateRoomDialog.tscn" type="PackedScene" id=15]
+[ext_resource path="res://addons/world_edtior/editor/popup/RoomEditMenu.gd" type="Script" id=16]
+[ext_resource path="res://addons/world_edtior/editor/connector/Arrow.tscn" type="PackedScene" id=17]
+[ext_resource path="res://addons/world_edtior/editor/node_connector/HelperArrow.gd" type="Script" id=18]
+[ext_resource path="res://addons/world_edtior/editor/node_connector/NodeConnector.gd" type="Script" id=19]
+
+[node name="MapEditor" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="MapLayoutManager" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="AreaLegendFactory" type="Node" parent="MapLayoutManager"]
+script = ExtResource( 7 )
+output_node_path = NodePath("../../UI/AreaLegends")
+
+[node name="ConnectorFactory" type="Node" parent="MapLayoutManager"]
+script = ExtResource( 3 )
+output_node_path = NodePath("../../ScrollContainer/GraphContainer/Connectors")
+
+[node name="GraphNodeFactory" type="Node" parent="MapLayoutManager"]
+script = ExtResource( 4 )
+output_node_path = NodePath("../../ScrollContainer/GraphContainer/GraphNodes")
+
+[node name="NodeConnector" type="Control" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource( 19 )
+
+[node name="HelperArrow" type="Control" parent="NodeConnector"]
+mouse_filter = 2
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Arrow" parent="NodeConnector/HelperArrow" instance=ExtResource( 17 )]
+visible = false
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+follow_focus = true
+
+[node name="GraphContainer" type="Container" parent="ScrollContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+script = ExtResource( 2 )
+
+[node name="Connectors" type="Control" parent="ScrollContainer/GraphContainer"]
+script = ExtResource( 2 )
+
+[node name="GraphNodes" type="Control" parent="ScrollContainer/GraphContainer"]
+script = ExtResource( 2 )
+
+[node name="UI" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Buttons" type="HBoxContainer" parent="UI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 737.0
+margin_bottom = 58.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="FileMenuButton" type="MenuButton" parent="UI/Buttons"]
+margin_right = 61.0
+margin_bottom = 48.0
+text = "File"
+flat = false
+items = [ "New Chapter", null, 0, false, false, 0, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Load Chapter", null, 0, false, false, 1, 0, null, "", false, "Save Chapter", null, 0, false, false, 2, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Clear", null, 0, false, false, 3, 0, null, "", false ]
+switch_on_hover = true
+script = ExtResource( 6 )
+create_chapter_dialog_path = NodePath("../../../Dialogs/CreateChapterDialog")
+load_chapter_dialog_path = NodePath("../../../Dialogs/LoadChapterDialog")
+
+[node name="AreaMenuButton" type="MenuButton" parent="UI/Buttons"]
+margin_left = 69.0
+margin_right = 144.0
+margin_bottom = 48.0
+focus_mode = 2
+disabled = true
+text = "Area"
+flat = false
+items = [ "Create Area", null, 0, false, false, 0, 0, null, "", false, "Edit Area", null, 0, false, true, 1, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Delete Area", null, 0, false, true, 2, 0, null, "", false ]
+switch_on_hover = true
+script = ExtResource( 8 )
+create_area_dialog_path = NodePath("../../../Dialogs/CreateAreaDialog")
+edit_area_dialog_path = NodePath("../../../Dialogs/EditAreaDialog")
+
+[node name="RoomMenuButton" type="MenuButton" parent="UI/Buttons"]
+margin_left = 152.0
+margin_right = 240.0
+margin_bottom = 48.0
+focus_mode = 2
+disabled = true
+text = "Room"
+flat = false
+items = [ "Create Room", null, 0, false, false, 0, 0, null, "", false, "Edit Room Area", null, 0, false, true, 1, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Fix Scene Path", null, 0, false, false, 2, 0, null, "", false, "Fix All Scene Path", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Delete Room", null, 0, false, true, 4, 0, null, "", false ]
+switch_on_hover = true
+script = ExtResource( 9 )
+create_room_dialog_path = NodePath("../../../Dialogs/CreateRoomDialog")
+edit_room_area_dialog_path = NodePath("../../../Dialogs/EditRoomDialog")
+
+[node name="btn_reload" type="Button" parent="UI/Buttons"]
+margin_left = 248.0
+margin_right = 346.0
+margin_bottom = 48.0
+disabled = true
+text = "Reload"
+
+[node name="cb_auto_connect" type="CheckBox" parent="UI/Buttons"]
+margin_left = 354.0
+margin_right = 555.0
+margin_bottom = 48.0
+text = "Auto Connect"
+
+[node name="cb_auto_save" type="CheckBox" parent="UI/Buttons"]
+margin_left = 563.0
+margin_right = 727.0
+margin_bottom = 48.0
+text = "Auto Save"
+
+[node name="AreaLegends" type="HBoxContainer" parent="UI"]
+margin_left = 10.0
+margin_top = 1070.0
+margin_right = 10.0
+margin_bottom = 1070.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ChapterDesc" type="VBoxContainer" parent="UI"]
+margin_left = 1910.0
+margin_top = 10.0
+margin_right = 1910.0
+margin_bottom = 68.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="lbl_chapter_name" type="Label" parent="UI/ChapterDesc"]
+margin_bottom = 25.0
+focus_mode = 1
+mouse_filter = 0
+align = 2
+valign = 1
+
+[node name="lbl_total_room" type="Label" parent="UI/ChapterDesc"]
+margin_top = 33.0
+margin_bottom = 58.0
+align = 2
+valign = 1
+
+[node name="Popups" type="Node" parent="."]
+
+[node name="RoomEditMenu" type="PopupMenu" parent="Popups"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 16 )
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="CreateChapterDialog" parent="Dialogs" instance=ExtResource( 13 )]
+popup_exclusive = true
+save_dialog_path = NodePath("../SaveChapterDialog")
+
+[node name="CreateAreaDialog" parent="Dialogs" instance=ExtResource( 14 )]
+popup_exclusive = true
+save_dialog_path = NodePath("../SaveAreaDialog")
+
+[node name="CreateRoomDialog" parent="Dialogs" instance=ExtResource( 15 )]
+margin_right = 431.0
+margin_bottom = 259.0
+popup_exclusive = true
+window_title = "Create Room"
+save_dialog_path = NodePath("../SaveRoomDialog")
+
+[node name="EditAreaDialog" parent="Dialogs" instance=ExtResource( 12 )]
+
+[node name="EditRoomDialog" parent="Dialogs" instance=ExtResource( 11 )]
+
+[node name="SaveChapterDialog" type="FileDialog" parent="Dialogs"]
+margin_right = 800.0
+margin_bottom = 480.0
+window_title = "Save Chapter"
+resizable = true
+filters = PoolStringArray( "*_cmap.tres" )
+
+[node name="SaveAreaDialog" type="FileDialog" parent="Dialogs"]
+margin_right = 800.0
+margin_bottom = 480.0
+window_title = "Save Area"
+resizable = true
+filters = PoolStringArray( "*_amap.tres" )
+
+[node name="SaveRoomDialog" type="FileDialog" parent="Dialogs"]
+margin_right = 800.0
+margin_bottom = 480.0
+window_title = "Save Room"
+resizable = true
+filters = PoolStringArray( "*_rmap.tres" )
+
+[node name="LoadChapterDialog" type="FileDialog" parent="Dialogs"]
+margin_right = 800.0
+margin_bottom = 480.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*_cmap.tres" )
+
+[connection signal="connected_two_nodes" from="NodeConnector" to="." method="_on_NodeConnector_connected_two_nodes"]
+[connection signal="pressed" from="UI/Buttons/btn_reload" to="." method="reload"]
+[connection signal="focus_entered" from="UI/ChapterDesc/lbl_chapter_name" to="." method="_on_lbl_chapter_name_focus_entered"]
+[connection signal="about_to_show" from="Popups/RoomEditMenu" to="NodeConnector/HelperArrow" method="_on_RoomEditMenu_about_to_show"]
+[connection signal="index_pressed" from="Popups/RoomEditMenu" to="NodeConnector" method="_on_RoomEditMenu_index_pressed"]
+[connection signal="popup_hide" from="Popups/RoomEditMenu" to="NodeConnector/HelperArrow" method="_on_RoomEditMenu_popup_hide"]
+[connection signal="resource_created" from="Dialogs/CreateChapterDialog" to="." method="_on_CreateChapterDialog_resource_created"]
+[connection signal="resource_created" from="Dialogs/CreateAreaDialog" to="." method="_on_CreateAreaDialog_resource_created"]
+[connection signal="resource_created" from="Dialogs/CreateRoomDialog" to="." method="_on_CreateRoomDialog_resource_created"]
+[connection signal="file_selected" from="Dialogs/LoadChapterDialog" to="UI/Buttons/FileMenuButton" method="_on_LoadChapterDialog_file_selected"]

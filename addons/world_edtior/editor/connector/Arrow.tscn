@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/world_edtior/editor/connector/Arrow.gd" type="Script" id=1]
+
+[node name="Arrow" type="Control"]
+margin_top = -0.707108
+margin_bottom = 4.29289
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

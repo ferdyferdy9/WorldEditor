@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/world_edtior/editor/dialog/base/CreateDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/world_edtior/editor/dialog/CreateRoomDialog.gd" type="Script" id=2]
+
+[node name="CreateRoomDialog" instance=ExtResource( 1 )]
+margin_bottom = 264.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" parent="MarginContainer" index="0"]
+margin_bottom = 246.0
+
+[node name="MarginContainer" parent="MarginContainer/VBoxContainer" index="0"]
+margin_bottom = 196.0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/MarginContainer" index="0"]
+margin_right = 413.0
+margin_bottom = 196.0
+columns = 2
+
+[node name="lbl_area" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="0"]
+margin_top = 6.0
+margin_right = 197.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+text = "Area :"
+
+[node name="ob_area" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="1"]
+margin_left = 205.0
+margin_right = 413.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+
+[node name="lbl_room_name" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="2"]
+margin_top = 55.0
+margin_right = 197.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+text = "Room Name :"
+
+[node name="le_room_name" type="LineEdit" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="3"]
+margin_left = 205.0
+margin_top = 45.0
+margin_right = 413.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+
+[node name="lbl_zone_total" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="4"]
+margin_top = 108.0
+margin_right = 197.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
+text = "Zone Total :"
+
+[node name="sb_zone_total" type="SpinBox" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="5"]
+margin_left = 205.0
+margin_top = 98.0
+margin_right = 413.0
+margin_bottom = 143.0
+size_flags_horizontal = 3
+
+[node name="lbl_file_path" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="6"]
+margin_top = 161.0
+margin_right = 197.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+text = "File Path :"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer" index="7"]
+margin_left = 205.0
+margin_top = 151.0
+margin_right = 413.0
+margin_bottom = 196.0
+
+[node name="le_file_path" type="LineEdit" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer/HBoxContainer" index="0"]
+margin_right = 164.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="btn_open_file" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/GridContainer/HBoxContainer" index="1"]
+margin_left = 172.0
+margin_right = 208.0
+margin_bottom = 45.0
+text = "F"
+
+[node name="btn_create" parent="MarginContainer/VBoxContainer" index="1"]
+margin_top = 204.0
+margin_bottom = 241.0
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/GridContainer/HBoxContainer/btn_open_file" to="." method="_on_btn_open_file_pressed"]
