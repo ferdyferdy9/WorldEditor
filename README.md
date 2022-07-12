@@ -1,6 +1,8 @@
 # WorldEditor
 A Godot plugin for World Editing tool to create connections between levels
 
+<img height=300 src="static/preview.png">
+
 How to install :
 1. clone the repo. and copy the addons folder to your project
 2. go to project settings > addons > enable the world editor plugin
